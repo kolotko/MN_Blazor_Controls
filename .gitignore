@@ -1,0 +1,9 @@
+bin
+obj
+.vs
+*min.css
+*es5.min.js
+\lib
+*.razor.css
+.idea
+*.user

@@ -1,0 +1,41 @@
+﻿@using Microsoft.JSInterop
+@typeparam TItem
+@inject IJSRuntime jsRuntime
+
+<div id="mn_multiSelectContainer-@this.GetHashCode()" class=" mn_multiSelectContainer" data-avaliable="@_multiSelectContainerDataAvaliable">
+    <div id="mn_multiSelectWrapper-@this.GetHashCode()" class="mn_multiSelectWrapper">
+        <div id="mn_freeSpaceFiller-@this.GetHashCode()" class="mn_freeSpaceFiller"></div>
+
+        <div id="mn_multiSelectSelectedValueContainer-@this.GetHashCode()" class="mn_multiSelectSelectedValueContainer">
+            <div id="mn_multiSelectSelectedValueWrapper-@this.GetHashCode()" class="mn_multiSelectSelectedValueWrapper">
+                @foreach(var item in _multiSelectValue)
+                {
+                    @ContentMultiSelect(item)
+                }
+            </div>
+        </div>
+        <div id="mn_multiSelect-image-container-@this.GetHashCode()" class="mn_multiSelect-image-container">
+            <svg id="mn_multiSelectSvgArrow-@this.GetHashCode()" width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="mn_multiSelectSvgArrowPath-@this.GetHashCode()" d="M11.0054 12.0067C11.3124 12.0067 11.6193 11.8839 11.828 11.6507L21.3302 1.91518C21.539 1.70647 21.6617 1.43639 21.6617 1.12946C21.6617 0.491074 21.1829 0 20.5445 0C20.2376 0 19.9552 0.122766 19.7465 0.3192L10.3425 9.93192H11.6561L2.25209 0.3192C2.05567 0.122766 1.7733 0 1.4541 0C0.815708 0 0.336914 0.491074 0.336914 1.12946C0.336914 1.43639 0.459682 1.70647 0.668387 1.92745L10.1706 11.6507C10.4039 11.8839 10.6862 12.0067 11.0054 12.0067Z" fill="#656565"></path>
+            </svg>
+        </div>
+    </div>
+    <label id="mn_multiSelectSelectedValueContainer-@this.GetHashCode()-label" for="mn_multiSelectSelectedValueContainer-@this.GetHashCode()">@Label</label>
+    <div id="mn_listSelect-@this.GetHashCode()" class="mn_listSelect">
+        <ul id="mn_multiSelect-ul-@this.GetHashCode()">
+            @foreach(var item in _itemsList)
+            {
+                <li id="mn_multiSelect-li-@this.GetHashCode()-@item.GetHashCode()" @onclick="(() => {setNewValue(item);})">
+                    <div id="mn_multiSelectCheckboxContainer-@this.GetHashCode()-@item.GetHashCode()" class="mn_multiSelectCheckboxContainer @_multiSelectCheckboxContainerClassDictionary[item.GetHashCode().ToString()]">
+                        <div id="mn_multiSelectCheckboxInput-@this.GetHashCode()-@item.GetHashCode()" class="mn_multiSelectCheckboxInput">
+                            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg" id="mn_multiSelect-checkbox-svg-@this.GetHashCode()-@item.GetHashCode()">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9136 0.199951L5.54761 6.56295L2.01361 3.02895L0.599609 4.44295L5.54761 9.39095L13.3276 1.61495L11.9136 0.199951Z" fill="#000000" id="mn_multiSelect-checkbox-path-@this.GetHashCode()-@item.GetHashCode()"></path>
+                            </svg>
+                        </div>
+                        <div id="mn_multiSelectCheckboxContent-@this.GetHashCode()-@item.GetHashCode()" class="mn_multiSelectCheckboxContent">@ContentList(item)</div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

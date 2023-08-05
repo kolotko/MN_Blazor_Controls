@@ -1,0 +1,56 @@
+﻿@import 'wwwroot/lib/MN_Libman-Files/Mixins.scss';
+
+/* we use css variables because we want to modify them in root project*/
+
+:root {
+    --mn_checkbox-gap: 12px;
+    --mn_checkbox-size: 25px;
+    --mn_checkbox-border-focus-color: green;
+    --mn_checkbox-border-focus-radius: 4px;
+    --mn_checkbox-border-width: 1px;
+    --mn_checkbox-border-focus-width: 2px;
+    --mn_checkbox-black: #000000;
+    --mn_checkbox-font-family: Arial;
+    --mn_checkbox-font-size: 16px;
+}
+
+.mn_checkboxContainer {
+    display: flex;
+    align-items: center;
+    gap: var(--mn_checkbox-gap);
+
+    .mn_checkboxInput {
+        @include mn_border-shadow( var(--mn_checkbox-border-focus-radius), var(--mn_checkbox-border-width), var(--mn_checkbox-black));
+        width: var(--mn_checkbox-size);
+        height: var(--mn_checkbox-size);
+        position: relative;
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 5px;
+            display: none;
+
+            path {
+                fill: var(--mn_checkbox-border-focus-color);
+            }
+        }
+    }
+
+    .mn_checkboxContent {
+        @include mn_font-settings(var(--mn_checkbox-font-family), var(--mn_checkbox-font-size));
+    }
+
+    &.mn_checkboxSet {
+        .mn_checkboxInput {
+            @include mn_border-shadow-focus-checkbox(var(--mn_checkbox-border-focus-radius),var(--mn_checkbox-border-focus-width), var(--mn_checkbox-border-focus-color));
+
+            svg {
+                display: unset;
+            }
+        }
+    }
+}

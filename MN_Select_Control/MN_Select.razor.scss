@@ -1,0 +1,123 @@
+﻿@import 'wwwroot/lib/MN_Libman-Files/Mixins.scss';
+
+/* we use css variables because we want to modify them in root project*/
+:root {
+    --mn_select-border-focus-width: 2px;
+    --mn_select-border-focus-radius: 4px;
+    --mn_select-border-radius: 2px;
+    --mn_select-border-width: 1px;
+    --mn_select-button-size: 26px;
+    --mn_select-black: #000000;
+    --mn_select-background-hover: #DDDDDD;
+    --mn_select-font-family: Arial;
+    --mn_select-font-size: 16px;
+}
+.mn_selectContainer {
+    @include mn_border-shadow(var(--mn_select-border-radius), var(--mn_select-border-width), var(--mn_select-black));
+    position: relative;
+    padding: var(--mn_select-border-focus-width);
+    padding-top: 12px;
+
+    .mn_selectWrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+
+        .mn_freeSpaceFiller {
+            position: absolute;
+            height: 12px;
+            width: 100%;
+            bottom: 100%;
+        }
+
+        .mn_selectSelectedValueContainer {
+            width: calc(100% - var(--mn_select-button-size));
+            height: var(--mn_select-button-size);
+            border: none;
+            display: block; // default ot inline i one chyba nie mają wysokosci
+            background: transparent;
+            @include mn_font-settings(var(--mn_select-font-family), var(--mn_select-font-size));
+
+            .mn_selectSelectedValueWrapper {
+                width: 100%;
+                height: 100%;
+                @include mn_opacityAnimation;
+            }
+        }
+
+        .mn_select-image-container {
+            width: var(--mn_select-button-size);
+            height: var(--mn_select-button-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                path {
+                    fill: var(--mn_select-black);
+                }
+            }
+        }
+    }
+
+    label {
+        @include mn_label(var(--mn_select-font-family), var(--mn_select-font-size));
+        transition-delay: 350ms;
+    }
+
+    .mn_listSelect {
+        position: absolute;
+        top: calc(100% + 2px);
+        left: 0;
+        width: 100%;
+        background: white;
+        z-index: 100;
+        @include mn_border-shadow-focus(var(--mn_select-border-focus-radius), var(--mn_select-border-focus-width), var(--mn_select-black));
+        @include mn_maxHeightAnimation;
+
+        ul {
+            height: 100%;
+            width: 100%;
+            @include mn_opacityAnimation;
+            margin: 0;
+            padding: 2px;
+            list-style-type: none;
+
+            li:hover {
+                background-color: var(--mn_select-background-hover);
+            }
+        }
+    }
+
+    &.mn_showList {
+        @include mn_border-shadow-focus(var(--mn_select-border-focus-radius), var(--mn_select-border-focus-width), var(--mn_select-black));
+
+        .mn_listSelect {
+            @include mn_border-shadow-focus(var(--mn_select-border-focus-radius), var(--mn_select-border-focus-width), var(--mn_select-black));
+            max-height: 200px;
+            @include mn_showMaxHeightAnimation;
+
+            ul {
+                @include mn_showOpacityAnimation;
+            }
+        }
+    }
+
+    &[data-avaliable] {
+        .mn_selectWrapper {
+            .mn_selectSelectedValueContainer {
+                .mn_selectSelectedValueWrapper {
+                    @include mn_showOpacityAnimation;
+                }
+            }
+        }
+
+        label {
+            top: 0;
+            font-size: 12px;
+            transform: unset;
+            transition-delay: unset;
+        }
+    }
+}

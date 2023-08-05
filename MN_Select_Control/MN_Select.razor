@@ -1,0 +1,31 @@
+﻿@using Microsoft.JSInterop
+@typeparam TItem
+@inject IJSRuntime jsRuntime
+
+<div id="mn_selectContainer-@this.GetHashCode()" class="mn_selectContainer" data-avaliable="@_selectContainerDataAvaliable">
+    <div id="mn_selectWrapper-@this.GetHashCode()" class="mn_selectWrapper">   
+        <div id="mn_freeSpaceFiller-@this.GetHashCode()" class="mn_freeSpaceFiller"></div>
+
+        <div id="mn_selectSelectedValueContainer-@this.GetHashCode()" class="mn_selectSelectedValueContainer">
+            <div id="mn_selectSelectedValueWrapper-@this.GetHashCode()" class="mn_selectSelectedValueWrapper">
+                @ContentSelect(_selectValue)
+            </div>
+        </div>
+        <div id="mn_select-image-container-@this.GetHashCode()" class="mn_select-image-container">
+            <svg id="mn_selectSvgArrow-@this.GetHashCode()" width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="mn_selectSvgArrowPath-@this.GetHashCode()" d="M11.0054 12.0067C11.3124 12.0067 11.6193 11.8839 11.828 11.6507L21.3302 1.91518C21.539 1.70647 21.6617 1.43639 21.6617 1.12946C21.6617 0.491074 21.1829 0 20.5445 0C20.2376 0 19.9552 0.122766 19.7465 0.3192L10.3425 9.93192H11.6561L2.25209 0.3192C2.05567 0.122766 1.7733 0 1.4541 0C0.815708 0 0.336914 0.491074 0.336914 1.12946C0.336914 1.43639 0.459682 1.70647 0.668387 1.92745L10.1706 11.6507C10.4039 11.8839 10.6862 12.0067 11.0054 12.0067Z" fill="#656565"></path>
+            </svg>
+        </div>
+    </div>
+    <label id="mn_labeSelectl-@this.GetHashCode()" for="mn_selectSelectedValueContainer-@this.GetHashCode()">@Label</label>
+    <div class="mn_listSelect">
+        <ul>
+            @foreach(var item in _itemsList)
+            {
+                <li @onclick="(() => {setNewValue(item);})">
+                    @ContentList(item)
+                </li>
+            }
+        </ul>
+    </div>
+</div>

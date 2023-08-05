@@ -1,0 +1,94 @@
+﻿@page "/mn-search"
+@using MN_Search_Control
+
+
+<h1>SaerchInput</h1>
+
+<h3>Zmienne css</h3>
+
+Poniżej znajduje się sekcja styli ze zmiennymi css udostępnianymi przez kontrolkę. Zmieniając wartości, kontrolka automatycznie dostosuje zmiany do wyglądu.
+
+<style contenteditable class="editable-style-section">
+    :root {
+        --mn_search-border-width: 1px;
+        --mn_search-border-focus-width: 2px;
+        --mn_search-border-radius: 2px;
+        --mn_search-border-focus-radius: 4px;
+        --mn_search-background-hover: #DDDDDD;
+        --mn_search-black: #000000;
+        --mn_search-font-family: Arial;
+        --mn_search-font-size: 16px;
+    }
+</style>
+<br/>
+
+aktualna wartość: @searchValue
+<br/>
+<h3>Wygląd kontrolki</h3>
+<MN_Search Label="label" @bind-SearchValue="searchValue" ItemsList="searchList" GenerateHint="getHint">
+    <ContentList Context="context">
+        @context
+    </ContentList>
+</MN_Search>
+<br />
+<br />
+<h2>Parametryzacja</h2>
+<span style="font-weight: bold;">bind-SearchValue</span>: zmienna ustawiająca oraz przechowująca wartość kontrolki
+<br />
+<span style="font-weight: bold;">ItemsList</span>: Wartości wyświetlane na liście
+<br />
+<span style="font-weight: bold;">GenerateHint</span>: Ewent po podniesieniu którego należy zaktualizować ItemsList na podstawie przekazanej wartości
+<br />
+<span style="font-weight: bold;">znacznik ContentList</span>: Sposób wyświetlania elementu na liście
+<br />
+<br />
+<h3>Użycie w kodzie</h3>
+@componentUsage
+<br />
+<br />
+<h3>Opis działania</h3>
+Kontrolka opiera się na mechanizmach renderowania fragmentu widoku w ContentList.
+<br />
+Podczas wpisywania wartości podnoszony jest event GenerateHint. Należy napisać obsługę tego eventu w której jest uaktualniana lista obiektów w polu ItemsList
+<br />
+Naciśnięcie klawisza Enter podczas wpisywania wartości jest równoznaczne z akceptacją wartości
+
+
+
+@code {
+    private string searchValue { get; set; }
+    private List<string> searchList { get; set; }
+    public string componentUsage { get; set; } = @"
+                                                <MN_Search Label=""label"" @bind-SearchValue=""searchValue"" ItemsList=""searchList"" GenerateHint=""getHint"">
+                                                    <ContentList Context=""context"">
+                                                        @context
+                                                    </ContentList>
+                                                </MN_Search>";
+
+    protected override Task OnInitializedAsync()
+    {
+        searchList = new List<string>();
+        getHint("");
+
+        return base.OnInitializedAsync();
+    }
+
+    private void getHint(string inputValue)
+    {
+        searchList = new List<string>();
+        searchList.Add(inputValue + " " + RandomString(2));
+        searchList.Add(inputValue + " " + RandomString(2));
+        searchList.Add(inputValue + " " + RandomString(2));
+        searchList.Add(inputValue + " " + RandomString(2));
+        searchList.Add(inputValue + " " + RandomString(2));
+        searchList.Add(inputValue + " " + RandomString(2));
+    }
+
+    public static string RandomString(int length)
+    {
+        Random random = new Random();
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
+}

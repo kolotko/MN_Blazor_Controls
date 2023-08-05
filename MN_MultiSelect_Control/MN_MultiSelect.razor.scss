@@ -1,0 +1,175 @@
+﻿@import 'wwwroot/lib/MN_Libman-Files/Mixins.scss';
+
+/* we use css variables because we want to modify them in root project*/
+:root {
+    --mn_multiSelect-border-width: 1px;
+    --mn_multiSelect-border-focus-width: 2px;
+    --mn_multiSelect-border-radius: 2px;
+    --mn_multiSelect-border-focus-radius: 4px;
+    --mn_multiSelect-button-size: 26px;
+    --mn_multiSelect-font-size: 16px;
+    --mn_multiSelect-black: #000000;
+    --mn_multiSelect-font-family: Arial;
+    --mn_multiSelect-checkbox-gap: 12px;
+    --mn_multiSelect-checkbox-size: 25px;
+    --mn_multiSelect-checkbox-border-color-focus: green;
+    --mn_multiSelect-background-hover: #DDDDDD;
+    --mn_multiSelect-list-padding: 5px;
+}
+
+.mn_multiSelectContainer {
+    @include mn_border-shadow(var(--mn_multiSelect-border-radius), var(--mn_multiSelect-border-width), var(--mn_multiSelect-black));
+    position: relative;
+    padding: var(--mn_multiSelect-border-focus-width);
+    padding-top: 12px;
+
+    .mn_multiSelectWrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+
+        .mn_freeSpaceFiller {
+            position: absolute;
+            height: 12px;
+            width: 100%;
+            bottom: 100%;
+        }
+
+        .mn_multiSelectSelectedValueContainer {
+            width: calc(100% - var(--mn_multiSelect-button-size));
+            height: var(--mn_multiSelect-button-size);
+            border: none;
+            display: block;
+            background: transparent;
+            @include mn_font-settings(var(--mn_multiSelect-font-family), var(--mn_multiSelect-font-size));
+
+            .mn_multiSelectSelectedValueWrapper {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                @include mn_opacityAnimation;
+            }
+        }
+
+        .mn_myltiSelect-image-container {
+            width: var(--mn_multiSelect-button-size);
+            height: var(--mn_multiSelect-button-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                path {
+                    fill: var(--mn_multiSelect-black);
+                }
+            }
+        }
+    }
+
+    label {
+        @include mn_label(var(--mn_multiSelect-font-family), var(--mn_multiSelect-font-size));
+        transition-delay: 350ms;
+    }
+
+    .mn_listSelect {
+        position: absolute;
+        top: calc(100% + 2px);
+        left: 0;
+        width: 100%;
+        background: white;
+        z-index: 100;
+
+        @include mn_border-shadow-focus(var(--mn_multiSelect-border-focus-radius), var(--mn_multiSelect-border-focus-width), var(--mn_multiSelect-black));
+        @include mn_maxHeightAnimation;
+
+        ul {
+            height: 100%;
+            width: 100%;
+            @include mn_opacityAnimation;
+            margin: 0;
+            padding: 2px;
+            list-style-type: none;
+
+            li {
+                .mn_multiSelectCheckboxContainer {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--mn_multiSelect-checkbox-gap);
+                    padding: var(--mn_multiSelect-list-padding);
+
+                    .mn_multiSelectCheckboxInput {
+                        @include mn_border-shadow(var(--mn_multiSelect-border-radius), var(--mn_multiSelect-border-width), var(--mn_multiSelect-black));
+                        width: var(--mn_multiSelect-checkbox-size);
+                        height: var(--mn_multiSelect-checkbox-size);
+                        position: relative;
+
+                        svg {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            padding: 5px;
+                            display: none;
+
+                            path {
+                                fill: var(--mn_multiSelect-checkbox-border-color-focus);
+                            }
+                        }
+                    }
+
+                    .mn_multiSelectCheckboxContent {
+                        @include mn_font-settings(var(--mn_multiSelect-font-family), var(--mn_multiSelect-font-size));
+                    }
+
+                    &.mn_multiSelectCheckboxSet {
+                        .mn_multiSelectCheckboxInput {
+                            @include mn_border-shadow-focus-checkbox(var(--mn_multiSelect-border-focus-radius),var(--mn_multiSelect-border-focus-width), var(--mn_multiSelect-checkbox-border-color-focus));
+
+                            svg {
+                                display: unset;
+                            }
+                        }
+                    }
+                }
+            }
+
+            li:hover {
+                background-color: var(--mn_multiSelect-background-hover);
+            }
+        }
+    }
+
+    &.mn_showList {
+        @include mn_border-shadow-focus(var(--mn_multiSelect-border-focus-radius), var(--mn_multiSelect-border-focus-width), var(--mn_multiSelect-black));
+
+        .mn_listSelect {
+            max-height: 200px;
+            @include mn_border-shadow-focus(var(--mn_multiSelect-border-focus-radius), var(--mn_multiSelect-border-focus-width), var(--mn_multiSelect-black));
+            @include mn_showMaxHeightAnimation;
+
+            ul {
+                @include mn_showOpacityAnimation;
+            }
+        }
+    }
+
+
+    &[data-avaliable] {
+        .mn_multiSelectWrapper {
+            .mn_multiSelectSelectedValueContainer {
+                .mn_multiSelectSelectedValueWrapper {
+                    @include mn_showOpacityAnimation;
+                }
+            }
+        }
+
+        label {
+            top: 0;
+            font-size: 12px;
+            transform: unset;
+            transition-delay: unset;
+        }
+    }
+}

@@ -1,0 +1,91 @@
+﻿@import 'wwwroot/lib/MN_Libman-Files/Mixins.scss';
+
+/* we use css variables because we want to modify them in root project*/
+:root {
+    --mn_search-border-width: 1px;
+    --mn_search-border-focus-width: 2px;
+    --mn_search-border-radius: 2px;
+    --mn_search-border-focus-radius: 4px;
+    --mn_search-background-hover: #DDDDDD;
+    --mn_search-black: #000000;
+    --mn_search-font-family: Arial;
+    --mn_search-font-size: 16px;
+}
+
+.mn_searchContainer {
+    @include mn_border-shadow(var(--mn_search-border-radius), var(--mn_search-border-width), var(--mn_search-black));
+    position: relative;
+    padding-top: 12px;
+
+    .mn_searchWrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        input {
+            margin: var(--mn_search-border-focus-width);
+            border: none;
+            outline: unset;
+            border-radius: var(--mn_search-border-radius);
+            width: calc(100% - var(--mn_search-border-focus-width) - var(--mn_search-border-focus-width));
+            @include mn_font-settings(var(--mn_search-font-family), var(--mn_search-font-size));
+        }
+    }
+
+    label {
+        @include mn_label(var(--mn_search-font-family), var(--mn_search-font-size));
+    }
+
+    .mn_listSearch {
+        position: absolute;
+        top: calc(100% + 2px);
+        left: 0;
+        width: 100%;
+        background: white;
+        z-index: 100;
+        @include mn_border-shadow-focus(var(--mn_search-border-focus-radius), var(--mn_search-border-focus-width), var(--mn_search-black));
+        @include mn_maxHeightAnimation;
+
+        ul {
+            height: 100%;
+            width: 100%;
+            @include mn_opacityAnimation;
+            margin: 0;
+            padding: 2px;
+            list-style-type: none;
+
+            li:hover {
+                background-color: var(--mn_search-background-hover);
+            }
+        }
+    }
+
+    &:focus-within,
+    &[data-avaliable]e &:focus-within {
+        @include mn_border-shadow-focus(var(--mn_search-border-focus-radius), var(--mn_search-border-focus-width), var(--mn_search-black));
+    }
+
+    &[data-avaliable],
+    &:focus-within {
+
+        label {
+            top: 0;
+            font-size: 12px;
+            transform: unset;
+        }
+    }
+
+    &.mn_showList {
+        @include mn_border-shadow-focus(var(--mn_search-border-focus-radius), var(--mn_search-border-focus-width), var(--mn_search-black));
+
+        .mn_listSearch {
+            @include mn_border-shadow-focus(var(--mn_search-border-focus-radius), var(--mn_search-border-focus-width), var(--mn_search-black));
+            max-height: 200px;
+            @include mn_showMaxHeightAnimation;
+
+            ul {
+                @include mn_showOpacityAnimation;
+            }
+        }
+    }
+}

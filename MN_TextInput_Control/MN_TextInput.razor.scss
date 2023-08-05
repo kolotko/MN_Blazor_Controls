@@ -1,0 +1,45 @@
+﻿@import 'wwwroot/lib/MN_Libman-Files/Mixins.scss';
+
+/* we use css variables because we want to modify them in root project*/ 
+:root {
+    --mn_textInput-border-focus: 2px;
+    --mn_textInput-border-radius: 2px;
+    --mn_textInput-border-focus-radius: 4px;
+    --mn_textInput-border-width: 1px;
+    --mn_textInput-border-width-focus: 2px;
+    --mn_textInput-black: #000000;
+    --mn_textInput-font-family: Arial;
+    --mn_textInput-font-size: 16px;
+}
+
+.mn_textInputContainer {
+    @include mn_border-shadow( var(--mn_textInput-border-focus-radius), var(--mn_textInput-border-width), var(--mn_textInput-black));
+    position: relative;
+    padding-top: 12px;
+
+    input {
+        margin: var(--mn_textInput-border-focus);
+        border: none;
+        outline: unset;
+        border-radius: var(--mn_textInput-border-radius);
+        width: calc(100% - var(--mn_textInput-border-focus) - var(--mn_textInput-border-focus));
+        @include mn_font-settings(var(--mn_textInput-font-family), var(--mn_textInput-font-size));
+    }
+
+    label {
+        @include mn_label(var(--mn_textInput-font-family), var(--mn_textInput-font-size));
+    }
+
+    &.mn_contentAvaliable,
+    &:focus-within {
+        label {
+            top: 0;
+            font-size: 12px;
+            transform: unset;
+        }
+    }
+
+    &:focus-within {
+        @include mn_border-shadow-focus(var(--mn_textInput-border-focus-radius), var(--mn_textInput-border-width-focus), var(--mn_textInput-black));
+    }
+}

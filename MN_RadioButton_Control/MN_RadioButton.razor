@@ -1,0 +1,16 @@
+﻿@typeparam TItem
+
+
+<div class="mn_radioButtonContainer">
+    @foreach(var item in ItemsList)
+    {
+        <div class="mn_radioButton_checkboxContainer @setSelectedStyle(item)">
+            <div class="mn_radioButton_checkboxInput"  @onclick="() => { setNewValue(item); }">
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg" b-z275r9dnqt="">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9136 0.199951L5.54761 6.56295L2.01361 3.02895L0.599609 4.44295L5.54761 9.39095L13.3276 1.61495L11.9136 0.199951Z" fill="#000000" b-z275r9dnqt=""></path>
+                </svg>
+            </div>
+            <div class="mn_radioButton_checkboxContent" @onclick="() => { setNewValue(item); }">@ContentList(item)</div>
+        </div>
+    }
+</div

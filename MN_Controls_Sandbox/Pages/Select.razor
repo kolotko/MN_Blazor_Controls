@@ -1,0 +1,109 @@
+﻿@page "/mn-select"
+@using MN_Controls_Sandbox.Class
+@using MN_Select_Control
+
+<h1>MN Select</h1>
+
+<h3>Zmienne css</h3>
+
+Poniżej znajduje się sekcja styli ze zmiennymi css udostępnianymi przez kontrolkę. Zmieniając wartości, kontrolka automatycznie dostosuje zmiany do wyglądu.
+
+<style contenteditable class="editable-style-section">
+    :root {
+        --mn_select-border-focus-width: 2px;
+        --mn_select-border-focus-radius: 4px;
+        --mn_select-border-radius: 2px;
+        --mn_select-border-width: 1px;
+        --mn_select-button-size: 26px;
+        --mn_select-black: #000000;
+        --mn_select-background-hover: #DDDDDD;
+        --mn_select-font-family: Arial;
+        --mn_select-font-size: 16px;
+    }
+</style>
+<br/>
+aktualna wartość: @selectedValue.RandomField1 @selectedValue.RandomField2 @selectedValue.RandomField3
+<br/>
+<h3>Wygląd kontrolki</h3>
+<MN_Select Label="label" @bind-SelectValue="selectedValue" ItemsList="selectValueList">
+    <ContentSelect Context="context">
+        @context.RandomField1, @context.RandomField2
+    </ContentSelect>
+    <ContentList Context="context">
+        @context.RandomField1, @context.RandomField2, @context.RandomField3
+    </ContentList>
+</MN_Select>
+<button @onclick="() => overridetSelectedValue()">zmiana listy</button>
+<br />
+<br />
+<h2>Parametryzacja</h2>
+<span style="font-weight: bold;">bind-SelectValue</span>: zmienna ustawiająca oraz przechowująca wartość kontrolki
+<br />
+<span style="font-weight: bold;">znacznik ContentSelect</span>: Sposób wyświetlania wybranego elementu
+<br />
+<span style="font-weight: bold;">znacznik ContentList</span>: Sposób wyświetlania listy dostępnych elementów
+<br />
+<br />
+<h3>Użycie w kodzie</h3>
+@componentUsage
+<br />
+<br />
+<h3>Opis działania</h3>
+Kontrolka opiera się na mechanizmach renderowania fragmentu widoku w ContentSelect oraz ContentList.
+<br />
+Jako że z poziomu blazora nie można manipolowac DOM by ukryć listę gdy użytkownik kliknie poza kontrolką użyto izolowanego java script.
+
+
+
+
+@code {
+    public RandomClass selectedValue { get; set; }
+    private List<RandomClass> selectValueList { get; set; }
+    public string componentUsage { get; set; } = @"
+                                                <MN_Select Label=""label"" @bind-SelectValue=""selectedValue"" ItemsList=""selectValueList"">
+                                                    <ContentSelect Context=""context"">
+                                                        @context.RandomField1, @context.RandomField2
+                                                    </ContentSelect>
+                                                    <ContentList Context=""context"">
+                                                        @context.RandomField1, @context.RandomField2, @context.RandomField3
+                                                    </ContentList>
+                                                </MN_Select>";
+
+    protected override Task OnInitializedAsync()
+    {
+        selectedValue = new RandomClass();
+        selectValueList = generateRandomList();
+
+        return base.OnInitializedAsync();
+    }
+
+    private List<RandomClass> generateRandomList()
+    {
+        var testList = new List<RandomClass>();
+        for (int i =0; i < 5; i++)
+        {
+            testList.Add(getNewRandomItem());
+        }
+
+        return testList;
+    }
+
+    private void overridetSelectedValue()
+    {
+        selectValueList = generateRandomList();
+    }
+
+    private RandomClass getNewRandomItem()
+    {
+        var rnd  = new Random();
+        var x = rnd.Next();
+        return new RandomClass()
+            {
+                RandomField1 = $"Name {x}",
+                RandomField2 = $"SurName {x}",
+                RandomField3 = $"Alias {x}",
+            };
+    }
+
+
+}

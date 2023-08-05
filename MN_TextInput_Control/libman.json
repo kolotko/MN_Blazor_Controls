@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "filesystem",
+      "library": "../MN_Libman-Files/",
+      "destination": "wwwroot/lib/MN_Libman-Files/",
+      "files": [
+        "Mixins.scss"
+      ]
+    }
+  ]
+}

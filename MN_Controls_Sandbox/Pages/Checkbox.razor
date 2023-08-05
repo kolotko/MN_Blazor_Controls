@@ -1,0 +1,62 @@
+﻿@page "/mn-checkbox"
+@using MN_Checkbox_Control
+
+<h1>MN Checkbox</h1>
+
+<h3>Zmienne css</h3>
+
+Poniżej znajduje się sekcja styli ze zmiennymi css udostępnianymi przez kontrolkę. Zmieniając wartości, kontrolka automatycznie dostosuje zmiany do wyglądu.
+
+<style contenteditable class="editable-style-section">
+    :root {
+        --mn_checkbox-gap: 12px;
+        --mn_checkbox-size: 25px;
+        --mn_checkbox-border-focus-color: green;
+        --mn_checkbox-border-focus-radius: 4px;
+        --mn_checkbox-border-width: 1px;
+        --mn_checkbox-border-focus-width: 2px;
+        --mn_checkbox-black: #000000;
+        --mn_checkbox-font-family: Arial;
+        --mn_checkbox-font-size: 16px;
+    }
+</style>
+<br />
+
+<h3>Wygląd kontrolki</h3>
+
+<MN_Checkbox @bind-CheckboxValue="@checkboxValue">
+    <Content>
+        pierwsza linia
+        <br />
+        druga linia
+    </Content>
+</MN_Checkbox>
+@checkboxValue
+
+<br />
+<br />
+<h2>Parametryzacja</h2>
+<span style="font-weight: bold;">bind-CheckboxValue</span>: zmienna ustawiająca oraz przechowująca wartość kontrolki
+<br />
+<span style="font-weight: bold;">znacznik Context</span>: miejsce dla tekstu kontrolki.
+<br />
+<br />
+<h3>Użycie w kodzie</h3>
+@componentUsage
+<br />
+<br />
+<h3>Opis działania</h3>
+Mechanizm RenderFragment pozwala przekazać wygląd sekcji z tekstem do miejsca użycia kontrolki.
+
+
+@code {
+    private bool checkboxValue { get; set; } = true;
+    public string componentUsage { get; set; } = @"
+                                                    <MN_Checkbox @bind-CheckboxValue=""@checkboxValue\"">
+                                                        <Content>
+                                                            pierwsza linia
+                                                            <br />
+                                                            druga linia
+                                                        </Content>
+                                                    </MN_Checkbox>";
+}

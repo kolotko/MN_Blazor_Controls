@@ -1,0 +1,55 @@
+﻿@page "/mn-textinput"
+
+@using MN_TextInput_Control
+
+<h1>MN TextInput</h1>
+
+<h3>Zmienne css</h3>
+
+Poniżej znajduje się sekcja styli ze zmiennymi css udostępnianymi przez kontrolkę. Zmieniając wartości, kontrolka automatycznie dostosuje zmiany do wyglądu.
+
+<style contenteditable class="editable-style-section">
+    :root {
+      --mn_textInput-border-focus: 2px;
+      --mn_textInput-border-radius: 2px;
+      --mn_textInput-border-focus-radius: 4px;
+      --mn_textInput-border-width: 1px;
+      --mn_textInput-border-width-focus: 2px;
+      --mn_textInput-black: #000000;
+      --mn_textInput-font-family: Arial;
+      --mn_textInput-font-size: 16px;
+    }
+</style>
+<br />
+
+<h3>Wygląd kontrolki</h3>
+
+<MN_TextInput @bind-InputValue="@TestInputValue" Label="label"/>
+Wartość podmapowanej zmiennej: @TestInputValue
+<br />
+<br />
+<h2>Parametryzacja</h2>
+<span style="font-weight: bold;">bind-InputValue</span>: zmienna ustawiająca oraz przechowująca wartość kontrolki
+<br />
+<span style="font-weight: bold;">Label</span>: opis kontrolki
+<br />
+<br />
+<h3>Użycie w kodzie</h3>
+@componentUsage
+<br />
+<br />
+<h3>Opis działania</h3>
+Komponent posiada 2 parametry. Pierwszym z nich jest “InputValue” odpowiedzialny za podpięcie zmiennej w której będzie znajdować się wartość z kontrolki. Jako że za pomocą tego pola można ustawić oraz pobrać wartość podpięcie zmiennej odbywa się poprzez “@@bind-InputValue”. 
+Taki sposób komunikacji wymaga od strony technicznej stworzenia parametru oraz eventu podnoszonego podczas zmiany wartości.
+<br />
+<br />
+Podpięcie referencji za pomocą “@@ref” umożliwia ustawienie focusu w inpucie.
+<br />
+<br />
+Domyślnie input zmienia wartośc w kontrolce gdy zgubi fokus. Aby zmienna w kontrolce była odświerzana co każdorazową zmianę, zmieniono jej zachowanie za pomocą @@bind-value:event="oninput"
+
+
+@code {
+    public string TestInputValue { get; set; }
+    public string componentUsage { get; set; } = "<MN_TextInput @bind-InputValue=\"@TestInputValue\" Label=\"label\"/>";
+}

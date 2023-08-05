@@ -1,0 +1,6 @@
+﻿<div class="mn_textInputContainer @_textInputContainerClass" @onclick="setInputFocus" @onfocusout="unsetInputFocus">
+    
+     <input id="@this.GetHashCode()" @ref="_refTextInput"  @bind-value="@InputValue" @bind-value:event="oninput"/>
+    
+    <label for="@this.GetHashCode()">@Label</label>
+</div>

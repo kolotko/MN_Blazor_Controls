@@ -1,0 +1,106 @@
+﻿@page "/mn-multiselect"
+@using MN_Controls_Sandbox.Class
+@using MN_MultiSelect_Control
+
+
+<h1>MN MultiSelect</h1>
+
+<h3>Zmienne css</h3>
+
+Poniżej znajduje się sekcja styli ze zmiennymi css udostępnianymi przez kontrolkę. Zmieniając wartości, kontrolka automatycznie dostosuje zmiany do wyglądu.
+
+<style contenteditable class="editable-style-section">
+    :root {
+        --mn_multiSelect-border-width: 1px;
+        --mn_multiSelect-border-focus-width: 2px;
+        --mn_multiSelect-border-radius: 2px;
+        --mn_multiSelect-border-focus-radius: 4px;
+        --mn_multiSelect-button-size: 26px;
+        --mn_multiSelect-font-size: 16px;
+        --mn_multiSelect-black: #000000;
+        --mn_multiSelect-font-family: Arial;
+        --mn_multiSelect-checkbox-gap: 12px;
+        --mn_multiSelect-checkbox-size: 25px;
+        --mn_multiSelect-checkbox-border-color-focus: green;
+        --mn_multiSelect-background-hover: #DDDDDD;
+        --mn_multiSelect-list-padding: 5px;
+    }
+</style>
+<br/>
+<h3>Wygląd kontrolki</h3>
+
+<MN_MultiSelect Label="label" @bind-MultiSelectValue="multiSelectSelectedList" ItemsList="multiSelectValueList">
+    <ContentMultiSelect Context="context">
+        @context.RandomField1, @context.RandomField2
+    </ContentMultiSelect>
+    <ContentList Context="context">
+        @context.RandomField1, @context.RandomField2, @context.RandomField3
+    </ContentList>
+</MN_MultiSelect>
+
+<br />
+<br />
+<h2>Parametryzacja</h2>
+<span style="font-weight: bold;">bind-MultiSelectValue</span>: zmienna ustawiająca oraz przechowująca wartość kontrolki
+<br />
+<span style="font-weight: bold;">ItemsList</span>: Wartości wyświetlane na liście
+<br />
+<span style="font-weight: bold;">znacznik ContentMultiSelect</span>: Sposób wyświetlania wybranego elementu
+<br />
+<span style="font-weight: bold;">znacznik ContentList</span>: Sposób wyświetlania elementu na liście
+<br />
+<br />
+<h3>Użycie w kodzie</h3>
+@componentUsage
+<br />
+<br />
+<h3>Opis działania</h3>
+Kontrolka opiera się na mechanizmach renderowania fragmentu widoku w ContentMultiSelect oraz ContentList.
+<br />
+Dla każdego elementu generowany jest osobny checkbox z własnym sposobem wyświetlania
+
+
+@code {
+    private List<RandomClass> multiSelectSelectedList { get; set; }
+    private List<RandomClass> multiSelectValueList { get; set; }
+    public string componentUsage { get; set; } = @"
+                                                <MN_MultiSelect Label=""label"" @bind-MultiSelectValue=""multiSelectSelectedList"" ItemsList=""multiSelectValueList"">
+                                                    <ContentMultiSelect Context=""context"">
+                                                        @context.RandomField1, @context.RandomField2
+                                                    </ContentMultiSelect>
+                                                    <ContentList Context=""context"">
+                                                        @context.RandomField1, @context.RandomField2, @context.RandomField3
+                                                    </ContentList>
+                                                </MN_MultiSelect>";
+
+    protected override Task OnInitializedAsync()
+    {
+        multiSelectSelectedList = new List<RandomClass>();
+        multiSelectValueList = generateNewList();
+
+        return base.OnInitializedAsync();
+    }
+
+    private List<RandomClass> generateNewList()
+    {
+        var testList = new List<RandomClass>();
+        for (int i =0; i < 5; i++)
+        {
+            testList.Add(getNewItem());
+        }
+
+        return testList;
+    }
+
+    private RandomClass getNewItem()
+    {
+        var rnd  = new Random();
+        var x = rnd.Next();
+        return new RandomClass()
+            {
+                RandomField1 = $"Name {x}",
+                RandomField2 = $"SurName {x}",
+                RandomField3 = x.ToString()
+            };
+    }
+}

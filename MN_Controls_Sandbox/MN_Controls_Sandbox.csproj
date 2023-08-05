@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Configurations>Debug;Release;LocalReferences</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="nuget.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="nuget.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
+  </ItemGroup>
+
+   <Choose>
+    <When Condition="'$(Configuration)'=='LocalReferences'">
+      <ItemGroup>
+        <ProjectReference Include="..\MN_Checkbox_Control\MN_Checkbox_Control.csproj" />
+        <ProjectReference Include="..\MN_MultiSelect_Control\MN_MultiSelect_Control.csproj" />
+        <ProjectReference Include="..\MN_RadioButton_Control\MN_RadioButton_Control.csproj" />
+        <ProjectReference Include="..\MN_Search_Control\MN_Search_Control.csproj" />
+        <ProjectReference Include="..\MN_Select_Control\MN_Select_Control.csproj" />
+        <ProjectReference Include="..\MN_TextInput_Control\MN_TextInput_Control.csproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+		<PackageReference Include="MN_Checkbox_Control" Version="1.0.0" />
+		<PackageReference Include="MN_MultiSelect_Control" Version="1.0.0" />
+		<PackageReference Include="MN_RadioButton_Control" Version="1.0.0" />
+		<PackageReference Include="MN_Search_Control" Version="1.0.0" />
+		<PackageReference Include="MN_Select_Control" Version="1.0.0" />
+		<PackageReference Include="MN_TextInput_Control" Version="1.0.0" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose> 
+</Project>

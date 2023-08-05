@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "defaultProvider": "filesystem",
+  "libraries": [
+    {
+      "library": "../MN_Libman-Files/",
+      "destination": "wwwroot/lib/MN_Libman-Files/",
+      "files": [
+        "Mixins.scss"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime jsRuntime
+<div id="mn_searchContainer-@this.GetHashCode()" class="mn_searchContainer" data-avaliable="@_searchContainerDataAvaliable" @onclick="setSearchFocus" @onfocusout="unsetSearchFocus">
+    <div id="mn_searchWrapper-@this.GetHashCode()" class="mn_searchWrapper">
+        <input id="mn_searchInput-@this.GetHashCode()" @ref="_refSearch"  @bind-value="@SearchValue" @bind-value:event="oninput"/>
+    </div>
+    <label for="mn_searchInput-@this.GetHashCode()">@Label</label>
+    <div id="mn_searchList-@this.GetHashCode()" class="mn_listSearch">
+        <ul>
+            @foreach(var item in ItemsList)
+            {
+                <li @onclick="(() => {setNewValue(item);})">
+                    @ContentList(item)
+                </li>
+            }
+        </ul>
+    </div>
+</div>

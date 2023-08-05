@@ -1,0 +1,64 @@
+:root {
+    --mn_textInput-border-focus: 2px;
+    --mn_textInput-border-radius: 2px;
+    --mn_textInput-border-focus-radius: 4px;
+    --mn_textInput-border-width: 1px;
+    --mn_textInput-border-width-focus: 2px;
+    --mn_textInput-black: #000000;
+    --mn_textInput-font-family: Arial;
+    --mn_textInput-font-size: 16px;
+
+    --mn_checkbox-gap: 12px;
+    --mn_checkbox-size: 25px;
+    --mn_checkbox-border-focus-color: green;
+    --mn_checkbox-border-focus-radius: 4px;
+    --mn_checkbox-border-width: 1px;
+    --mn_checkbox-border-focus-width: 2px;
+    --mn_checkbox-black: #000000;
+    --mn_checkbox-font-family: Arial;
+    --mn_checkbox-font-size: 16px;
+
+    --mn_select-border-focus-width: 2px;
+    --mn_select-border-focus-radius: 4px;
+    --mn_select-border-radius: 2px;
+    --mn_select-border-width: 1px;
+    --mn_select-button-size: 26px;
+    --mn_select-black: #000000;
+    --mn_select-background-hover: #DDDDDD;
+    --mn_select-font-family: Arial;
+    --mn_select-font-size: 16px;
+
+    --mn_search-border-width: 1px;
+    --mn_search-border-focus-width: 2px;
+    --mn_search-border-radius: 2px;
+    --mn_search-border-focus-radius: 4px;
+    --mn_search-background-hover: #DDDDDD;
+    --mn_search-black: #000000;
+    --mn_search-font-family: Arial;
+    --mn_search-font-size: 16px;
+
+    --mn_multiSelect-border-width: 1px;
+    --mn_multiSelect-border-focus-width: 2px;
+    --mn_multiSelect-border-radius: 2px;
+    --mn_multiSelect-border-focus-radius: 4px;
+    --mn_multiSelect-button-size: 26px;
+    --mn_multiSelect-font-size: 16px;
+    --mn_multiSelect-black: #000000;
+    --mn_multiSelect-font-family: Arial;
+    --mn_multiSelect-checkbox-gap: 12px;
+    --mn_multiSelect-checkbox-size: 25px;
+    --mn_multiSelect-checkbox-border-color-focus: green;
+    --mn_multiSelect-background-hover: #DDDDDD;
+    --mn_multiSelect-list-padding: 5px;
+
+    --mn_checkbox-border-focus-radius: 4px;
+    --mn_checkbox-border-radius: 2px;
+    --mn_checkbox-border-focus-width: 2px;
+    --mn_checkbox-border-width: 1px;
+    --mn_checkbox-black: #000000;
+    --mn_checkbox-font-family: Arial;
+    --mn_checkbox-font-size: 16px;
+    --mn_checkbox-gap: 12px;
+    --mn_checkbox-size: 25px;
+    --mn_checkbox-border-color-focus: green;
+}
