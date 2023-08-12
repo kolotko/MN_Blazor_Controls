@@ -19,16 +19,16 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
   </ItemGroup>
-
+	
    <Choose>
     <When Condition="'$(Configuration)'=='LocalReferences'">
       <ItemGroup>
-        <ProjectReference Include="..\MN_Checkbox_Control\MN_Checkbox_Control.csproj" />
-        <ProjectReference Include="..\MN_MultiSelect_Control\MN_MultiSelect_Control.csproj" />
-        <ProjectReference Include="..\MN_RadioButton_Control\MN_RadioButton_Control.csproj" />
-        <ProjectReference Include="..\MN_Search_Control\MN_Search_Control.csproj" />
-        <ProjectReference Include="..\MN_Select_Control\MN_Select_Control.csproj" />
-        <ProjectReference Include="..\MN_TextInput_Control\MN_TextInput_Control.csproj" />
+		<!--Ścieżka odwołująca się do dll-->
+        <!--<Reference Include="MN_Checkbox_Control">
+          <HintPath>..\MN_Checkbox_Control\bin\Debug\net6.0\ref\MN_Checkbox_Control.dll</HintPath>
+        </Reference>-->
+	  
+	<!--W przypadku blazora rekomentuje odwołać się ręcznie do projektu-->
       </ItemGroup>
     </When>
     <Otherwise>
