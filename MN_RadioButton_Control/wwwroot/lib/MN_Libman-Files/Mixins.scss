@@ -1,0 +1,55 @@
+@mixin mn_border-shadow($mn_border-radius, $mn_border-width, $mn_black) {
+    border-radius: $mn_border-radius;
+    box-shadow: inset 0 0 0 $mn_border-width $mn_black;
+    transition-property: box-shadow;
+    transition-duration: .2s;
+}
+
+@mixin mn_border-shadow-focus($mn_border-radius-focus, $mn_border-width-focus, $mn_black) {
+    border-radius: $mn_border-radius-focus;
+    box-shadow: inset 0 0 0 $mn_border-width-focus $mn_black;
+}
+
+@mixin mn_border-shadow-focus-checkbox($mn_border-radius-focus,$mn_border-width-focus, $mn_checkbox-border-color-focus) {
+    border-radius: $mn_border-radius-focus;
+    box-shadow: inset 0 0 0 $mn_border-width-focus $mn_checkbox-border-color-focus;
+}
+
+@mixin mn_font-settings($mn_font-family, $mn_font-size) {
+    font-family: $mn_font-family;
+    font-size: $mn_font-size;
+}
+
+@mixin mn_label-text($mn_font-family, $mn_font-size) {
+    @include mn_font-settings($mn_font-family, $mn_font-size);
+}
+
+@mixin mn_label($mn_font-family, $mn_font-size) {
+    position: absolute;
+    top: 50%;
+    left: 9px;
+    transform: translate(0, -50%);
+    @include mn_label-text($mn_font-family, $mn_font-size);
+    transition: all .3s;
+}
+
+@mixin mn_maxHeightAnimation {
+    transition: max-height 0.2s ease-in-out;
+    overflow: hidden;
+    max-height: 0;
+}
+
+@mixin mn_showMaxHeightAnimation {
+    transition: max-height 0.2s ease-in-out;
+    overflow: auto;
+}
+
+@mixin mn_opacityAnimation {
+    transition: opacity 0.2s ease-in-out 0.2s;
+    opacity: 0;
+}
+
+@mixin mn_showOpacityAnimation {
+    transition: opacity 0.2s ease-in-out 0.2s;
+    opacity: unset;
+}
